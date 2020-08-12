@@ -48,7 +48,6 @@ function setLevel(difficulty) {
     case "hard":
       maxFlipped = 4;
   }
-
   // Load new card set
   loadCards(difficulty);
 }
@@ -291,6 +290,12 @@ function checkMatch() {
     showProps(matchVal, selectLevel.value);
     // Reset flip count
     flipCount = 0;
+    if (
+      game.querySelectorAll(".card").length ==
+      game.querySelectorAll(".solved").length
+    ) {
+      console.log("You win");
+    }
   }
 }
 
