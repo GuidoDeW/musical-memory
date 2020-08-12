@@ -17,7 +17,7 @@ body {
   align-items: center;
   justify-content: space-between;
   min-height: 100vh;
-  overflow: hidden;
+  /* overflow: hidden; */
   margin: 0;
   font-family: "Roboto Condensed", Arial, Helvetica, sans-serif;
   background-color: rgb(238, 252, 255);
@@ -25,11 +25,12 @@ body {
 }
 
 .instructions {
-  position: absolute;
+  position: fixed;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  justify-content: start;
   top: 0;
   left: 0;
   width: 300px;
@@ -193,3 +194,5 @@ body {
   visibility: visible;
   opacity: 1;
 }
+
+/* Media queries */
