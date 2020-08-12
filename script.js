@@ -14,12 +14,20 @@ instructBtn.addEventListener("click", () =>
 );
 hideBtn.addEventListener("click", () => instructions.classList.remove("show"));
 game.addEventListener("click", flipCard);
-selectLevel.addEventListener("change", (e) => setLevel(e.target.value));
+selectLevel.addEventListener("change", (e) => {
+  localStorage.setItem("difficulty", JSON.stringify(selectLevel.selectedIndex));
+  setLevel(e.target.value);
+});
 
 selectKey.addEventListener("change", () => {
+  localStorage.setItem("key", JSON.stringify(selectKey.selectedIndex));
   loadCards(selectLevel.value);
 });
-selectScale.addEventListener("change", () => loadCards(selectLevel.value));
+
+selectScale.addEventListener("change", () => {
+  localStorage.setItem("scale", JSON.stringify(selectScale.selectedIndex));
+  loadCards(selectLevel.value);
+});
 document.addEventListener("DOMContentLoaded", init);
 
 // let difficulty = selectLevel.value;
@@ -30,9 +38,15 @@ let maxFlipped = 2;
 //Pre-select key, scale and level, and start game
 function init() {
   // Add LS functionality?
-  selectKey.selectedIndex = "1";
-  selectScale.selectedIndex = "0";
-  selectLevel.selectedIndex = "0";
+  selectKey.selectedIndex = localStorage.getItem("key")
+    ? JSON.parse(localStorage.getItem("key"))
+    : "1";
+  selectScale.selectedIndex = localStorage.getItem("scale")
+    ? JSON.parse(localStorage.getItem("scale"))
+    : "0";
+  selectLevel.selectedIndex = localStorage.getItem("difficulty")
+    ? JSON.parse(localStorage.getItem("difficulty"))
+    : "0";
   setLevel(selectLevel.value);
 }
 
