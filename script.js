@@ -198,7 +198,11 @@ function loadScale(tone, acc, mode) {
 
 function loadCards(difficulty) {
   // Empty out playing field
-  game.innerHTML = "";
+  game.innerHTML = `<div id="win-div" class="win-div">
+    <h1>Well done!</h1>
+    <button id="new-game-btn" class="new-game-btn btn">New game</button>
+  </div>`;
+  // document.getElementById("win-div").classList.remove("opaque");
   // Reset flip count
   flipCount = 0;
   let cards = loadScale(
@@ -294,7 +298,7 @@ function checkMatch() {
       game.querySelectorAll(".card").length ==
       game.querySelectorAll(".solved").length
     ) {
-      console.log("You win");
+      newGamePopUp();
     }
   }
 }
@@ -320,6 +324,16 @@ function updateBar(cards) {
         (resultBar[index].querySelector(".qual").innerHTML = card.text)
     );
   console.log(cards);
+}
+
+function newGamePopUp() {
+  let winDiv = document.getElementById("win-div");
+  winDiv.classList.add("opaque");
+  winDiv.addEventListener("click", (e) => {
+    if (e.target.classList.contains("new-game-btn")) {
+      loadCards(selectLevel.value);
+    }
+  });
 }
 
 function showProps(matchVal, difficulty) {
