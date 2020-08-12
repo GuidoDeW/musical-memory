@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Musical Memory</title>
+  </head>
+  <body>
+    <section id="instructions" class="instructions">
+      <p>
+        Select a key and a mode you would like to practice. Each chord memory
+        card has a corresponding scale degree card. Memorize the positions of
+        matching cards, and click all card pairs to win the game!
+      </p>
+      <button id="hide-btn" class="hide-btn btn">Hide</button>
+    </section>
+    <!-- Title and instructions -->
+    <section class="container" id="container">
+      <div class="title" id="title">
+        <h1>Musical Memory</h1>
+        <button class="instruct-btn btn" id="instruct-btn">
+          Instructions
+        </button>
+        <!-- A drop-down menu with different keys -->
+        <div id="menus" class="menus">
+          <select name="Key" id="select-key">
+            <option value="Ff">F</option>
+            <option value="Cs">C</option>
+            <option value="Gs">G</option>
+            <option value="Ds">D</option>
+            <option value="As">A</option>
+            <option value="Es">E</option>
+            <option value="Bs">B</option>
+            <option value="Gf">G&flat;</option>
+            <option value="Df">D&flat;</option>
+            <option value="Af">A&flat;</option>
+            <option value="Ef">E&flat;</option>
+            <option value="Bf">B&flat;</option>
+            <option value="Fs">F&sharp;</option>
+          </select>
+          <select name="Scale" id="select-scale">
+            <option value="major">Natural major</option>
+            <option value="natmin">Natural minor</option>
+            <option value="harmmin">Harmonic minor</option>
+            <option value="melmin">Melodic minor</option>
+          </select>
+          <select name="Difficulty" id="select-difficulty">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </div>
+      </div>
+      <!-- Game play field-->
+      <div id="game" class="game">
+        <!-- Easy level -->
+        <!---->
+      </div>
+    </section>
+    <section id="results" class="results">
+      <!-- Fillable scale goes here-->
+      <!--  Replcae these with an ul , each li of which contains another ul!-->
+      <ul id="slot-1" class="slot">
+        <li class="degree">I</li>
+        <li class="note"></li>
+        <li class="qual"></li>
+        <li class="chordfunc">Tonic</li>
+      </ul>
+      <ul id="slot-2" class="slot">
+        <li>II</li>
+        <li class="note"></li>
+        <li class="qual"></li>
+        <li class="chordfunc">Supertonic</li>
+      </ul>
+      <ul id="slot-3" class="slot">
+        <li>III</li>
+        <li class="note"></li>
+        <li class="qual"></li>
+        <li class="chordfunc">Mediant</li>
+      </ul>
+      <ul id="slot-4" class="slot">
+        <li>IV</li>
+        <li class="note"></li>
+        <li class="qual"></li>
+        <li class="chordfunc">Subdominant</li>
+      </ul>
+      <ul id="slot-5" class="slot">
+        <li>V</li>
+        <li class="note"></li>
+        <li class="qual"></li>
+        <li class="chordfunc">Dominant</li>
+      </ul>
+      <ul id="slot-6" class="slot">
+        <li>VI</li>
+        <li class="note"></li>
+        <li class="qual"></li>
+        <li class="chordfunc">Submediant</li>
+      </ul>
+      <ul id="slot-7" class="slot">
+        <li>VII</li>
+        <li class="note"></li>
+        <li class="qual"></li>
+        <li class="chordfunc">Leading tone</li>
+      </ul>
+    </section>
+    <script src="script.js"></script>
+  </body>
+</html>

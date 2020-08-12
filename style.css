@@ -1,0 +1,162 @@
+:root {
+  --btn-bg: rgb(102, 102, 102);
+  --card-bg: rgb(155, 155, 220);
+  --card-back-bg: rgb(90, 90, 204);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.instructions {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  top: 0;
+  left: 0;
+  width: 400px;
+  min-height: 100vh;
+  padding: 20px;
+  color: #fff;
+  transform: translateX(-400px);
+  transition: transform 0.5s ease-in-out;
+  background: var(--btn-bg);
+}
+
+.instructions.show {
+  transform: translateX(0);
+}
+
+.btn {
+  display: block;
+  cursor: pointer;
+  width: 100px;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.btn:active {
+  transform: scale(0.95);
+}
+
+.instruct-btn {
+  background: var(--btn-bg);
+  color: #fff;
+  margin: 0 0 20px 0;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* background: red; */
+}
+
+.menus select {
+  background: var(--btn-bg);
+  border-radius: 5px;
+  padding: 5px;
+  color: #fff;
+}
+
+.menus select:active {
+  outline: none;
+}
+
+.game {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: 680px;
+  max-height: 400px;
+  border: 1px solid var(--btn-bg);
+  border-radius: 5px;
+  padding: 15px;
+  margin: 20px 0 0 0;
+}
+
+.card {
+  cursor: pointer;
+  color: var(--card-back-bg);
+  background: var(--card-back-bg);
+  text-align: center;
+  line-height: 80px;
+  height: 80px;
+  width: 80px;
+  margin: 5px;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 5px;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+  transform: rotateY(180deg);
+  transition: transform 0.2s, opacity 2s;
+}
+
+.card.flip,
+.card.solved {
+  /*.solved has these properties too to stop card from flipping over during fade-out effect */
+  transform: rotateY(0);
+  background-color: var(--card-bg);
+  color: #fff;
+}
+
+.card.solved {
+  opacity: 0;
+  cursor: auto;
+}
+
+.results {
+  display: flex;
+  margin: 20px 0;
+  justify-content: space-around;
+  width: 650px;
+}
+
+.slot {
+  margin: 0 10px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-weight: bold;
+  list-style: none;
+}
+
+.slot li {
+  margin: 10px 0;
+}
+
+.note,
+.qual,
+.chordfunc {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 2s;
+}
+
+.note.found,
+.qual.found,
+.chordfunc.found {
+  visibility: visible;
+  opacity: 1;
+}
