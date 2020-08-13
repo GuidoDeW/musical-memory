@@ -81,6 +81,7 @@ body {
 
 .menus select {
   background: var(--btn-bg);
+  border: none;
   border-radius: 5px;
   padding: 5px;
   color: #fff;
@@ -89,10 +90,6 @@ body {
 .menus select:active,
 .menus select:focus {
   outline: none;
-}
-
-.menus select option:focus {
-  background: rgba(var(--btn-bg), 0.5);
 }
 
 .game {
@@ -177,7 +174,7 @@ body {
 }
 
 .slot li {
-  margin: 10px 0;
+  margin: 15px 0;
 }
 
 .note,
@@ -196,3 +193,75 @@ body {
 }
 
 /* Media queries */
+@media screen and (max-width: 480px) {
+  .game {
+    max-height: 210px;
+    max-width: 350px;
+    padding: 5px 0;
+  }
+
+  .card {
+    line-height: 43px;
+    height: 43px;
+    width: 43px;
+    margin: 2.5px;
+    font-size: 8px;
+    overflow-wrap: normal;
+  }
+
+  .results {
+    flex-direction: column;
+    margin: 0 15px;
+    align-items: flex-start;
+    justify-content: space-around;
+    max-width: 80vw;
+  }
+
+  .slot {
+    flex-direction: row;
+    margin: 0;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .slot li {
+    margin: 10px 0;
+  }
+
+  .instructions {
+    width: 200px;
+    transform: translateX(-200px);
+  }
+  .instructions p {
+    margin: 8px 0;
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .game {
+    height: auto;
+    max-height: 263px;
+    max-width: 480px;
+    padding: 5px 0;
+  }
+
+  .card {
+    line-height: 53px;
+    height: 53px;
+    width: 53px;
+    margin: 5px;
+    font-size: 10px;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  .hide-btn {
+    margin-top: 8px;
+  }
+  .instructions {
+    padding: 10px;
+  }
+  .instructions p {
+    margin: 8px 0;
+  }
+}
