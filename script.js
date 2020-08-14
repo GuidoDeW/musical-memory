@@ -180,15 +180,15 @@ function loadScale(tone, acc, mode) {
       newScale[sharpInds[i]] += "&sharp;";
     }
   }
-  if (mode !== "major") {
+  if (mode != "major") {
     newScale[2] = newScale[2].includes("&sharp;")
       ? newScale[2].slice(0, 1)
       : newScale[2].concat("&flat;");
-    if (mode !== "melmin") {
+    if (mode != "melmin") {
       newScale[5] = newScale[5].includes("&sharp;")
         ? newScale[5].slice(0, 1)
         : newScale[5].concat("&flat;");
-      if (mode !== "harmmin") {
+      if (mode != "harmmin") {
         newScale[6] = newScale[6].includes("&sharp;")
           ? newScale[6].slice(0, 1)
           : newScale[6].concat("&flat;");
@@ -200,7 +200,7 @@ function loadScale(tone, acc, mode) {
 
 function loadCards(difficulty) {
   game.innerHTML = `<div id="win-div" class="win-div">
-    <h1>Well done!</h1>
+    <h2>Well done!</h2>
     <button id="new-game-btn" class="new-game-btn btn">New game</button>
   </div>`;
   flipCount = 0;
@@ -213,12 +213,12 @@ function loadCards(difficulty) {
       return { text: card, match: [index + 1], type: "note" };
     })
     .concat(degrees);
-  if (difficulty !== "easy") {
+  if (difficulty != "easy") {
     cards = cards.concat(
       chordQuals.find((item) => item.scale === selectScale.value).quals
     );
   }
-  if (difficulty === "hard") {
+  if (difficulty == "hard") {
     cards = cards.concat(chordFuncs);
   }
   cards
@@ -237,11 +237,7 @@ function loadCards(difficulty) {
 }
 
 function flipCard(e) {
-  if (
-    e.target.classList.contains("card") &&
-    !e.target.classList.contains("flip") &&
-    !e.target.classList.contains("solved")
-  ) {
+  if (e.target.className == "card") {
     if (flipCount >= maxFlipped) {
       document
         .querySelectorAll(".flip")
@@ -251,7 +247,7 @@ function flipCard(e) {
     if (!e.target.classList.contains("flip")) {
       e.target.classList.add("flip");
       flipCount++;
-      if (flipCount === maxFlipped) {
+      if (flipCount == maxFlipped) {
         checkMatch();
       }
     }
@@ -321,12 +317,12 @@ function showProps(matchVal, difficulty) {
   solvedUl
     .querySelectorAll(".note")
     .forEach((note) => note.classList.add("found"));
-  if (difficulty !== "easy") {
+  if (difficulty != "easy") {
     solvedUl
       .querySelectorAll(".qual")
       .forEach((qual) => qual.classList.add("found"));
   }
-  if (difficulty === "hard") {
+  if (difficulty == "hard") {
     solvedUl
       .querySelectorAll(".chordfunc")
       .forEach((func) => func.classList.add("found"));

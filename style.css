@@ -43,6 +43,10 @@ body {
   transform: translateX(0);
 }
 
+h1 {
+  font-size: 2em;
+}
+
 .btn {
   display: block;
   cursor: pointer;
@@ -73,6 +77,13 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+}
+
+.menus {
+  display: flex;
+  width: 60%;
+  justify-content: space-between;
 }
 
 .menus select {
@@ -192,6 +203,11 @@ body {
 
 /* Media queries */
 @media screen and (max-width: 320px) {
+  .menus {
+    width: 100%;
+    justify-content: space-around;
+  }
+
   .game {
     max-height: 210px;
     max-width: 320px;
@@ -237,6 +253,11 @@ body {
 }
 
 @media screen and (min-width: 321px) and (max-width: 480px) {
+  .menus {
+    width: 100%;
+    justify-content: space-around;
+  }
+
   .game {
     max-height: 210px;
     max-width: 340px;
