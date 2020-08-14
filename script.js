@@ -1,4 +1,3 @@
-// Get DOM elements
 const instructBtn = document.getElementById("instruct-btn"),
   hideBtn = document.getElementById("hide-btn"),
   instructions = document.getElementById("instructions"),
@@ -8,7 +7,6 @@ const instructBtn = document.getElementById("instruct-btn"),
   selectScale = document.getElementById("select-scale"),
   results = document.getElementById("results");
 
-//Event listeners
 instructBtn.addEventListener("click", () =>
   instructions.classList.toggle("show")
 );
@@ -30,14 +28,10 @@ selectScale.addEventListener("change", () => {
 });
 document.addEventListener("DOMContentLoaded", init);
 
-// let difficulty = selectLevel.value;
 let flipCount = 0;
-// Adjust maxFlipped according to difficulty level
 let maxFlipped = 2;
 
-//Pre-select key, scale and level, and start game
 function init() {
-  // Add LS functionality?
   selectKey.selectedIndex = localStorage.getItem("key")
     ? JSON.parse(localStorage.getItem("key"))
     : "1";
@@ -51,7 +45,6 @@ function init() {
 }
 
 function setLevel(difficulty) {
-  //Function is only called on change. Adjust maxFlipped
   switch (difficulty) {
     case "easy":
       maxFlipped = 2;
@@ -62,18 +55,15 @@ function setLevel(difficulty) {
     case "hard":
       maxFlipped = 4;
   }
-  // Load new card set
   loadCards(difficulty);
 }
 
-//Circle of fifths-based scale components
 const allNotes = ["C", "D", "E", "F", "G", "A", "B"];
 const sharpKeys = ["G", "D", "A", "E", "B", "F"];
 const sharpInds = [6, 2, 5, 1, 4, 0];
 const flatKeys = ["F", "B", "E", "A", "D", "G"];
 const flatInds = [3, 0, 4, 1, 5, 2];
 
-//Degrees
 const degrees = [
   { text: "I", match: [1], type: "degree" },
   { text: "II", match: [2], type: "degree" },
@@ -84,7 +74,6 @@ const degrees = [
   { text: "VII", match: [7], type: "degree" },
 ];
 
-//Chord qualities
 const chordQuals = [
   {
     scale: "major",
@@ -136,7 +125,6 @@ const chordQuals = [
   },
 ];
 
-//Functions
 const chordFuncs = [
   {
     text: "Tonic",
@@ -211,13 +199,10 @@ function loadScale(tone, acc, mode) {
 }
 
 function loadCards(difficulty) {
-  // Empty out playing field
   game.innerHTML = `<div id="win-div" class="win-div">
     <h1>Well done!</h1>
     <button id="new-game-btn" class="new-game-btn btn">New game</button>
   </div>`;
-  // document.getElementById("win-div").classList.remove("opaque");
-  // Reset flip count
   flipCount = 0;
   let cards = loadScale(
     selectKey.value.charAt(0),
@@ -229,54 +214,43 @@ function loadCards(difficulty) {
     })
     .concat(degrees);
   if (difficulty !== "easy") {
-    // Load chord qualities
     cards = cards.concat(
       chordQuals.find((item) => item.scale === selectScale.value).quals
     );
   }
   if (difficulty === "hard") {
-    // Load chord functions
     cards = cards.concat(chordFuncs);
   }
-  // Shuffle cards
   cards
     .map((card) => ({ value: card, shuffle: Math.random() }))
     .sort((a, b) => a.shuffle - b.shuffle)
     .map((card) => card.value)
     .forEach((card) => {
-      // Load into DOM (flipped over)
       let cardDiv = document.createElement("div");
       cardDiv.classList.add("card");
       cardDiv.setAttribute("data-match", `${card.match.join(",")}`);
       cardDiv.setAttribute("data-type", `${card.type}`);
       cardDiv.innerHTML = card.text;
       game.appendChild(cardDiv);
-      // cardDiv.addEventListener("click", checkMatch());
     });
-  // Adjust innerText per li per slot
   updateBar(cards);
 }
 
 function flipCard(e) {
-  // Check if target is (unflipped) card
   if (
     e.target.classList.contains("card") &&
     !e.target.classList.contains("flip") &&
     !e.target.classList.contains("solved")
   ) {
-    // Check number of flipped cards
     if (flipCount >= maxFlipped) {
       document
         .querySelectorAll(".flip")
         .forEach((flippedCard) => flippedCard.classList.remove("flip"));
-      // Flip all cards back down, reset flip count
       flipCount = 0;
     }
-    // Add flip class to target and update flip count
     if (!e.target.classList.contains("flip")) {
       e.target.classList.add("flip");
       flipCount++;
-      //Check match if max number of cards flipped
       if (flipCount === maxFlipped) {
         checkMatch();
       }
@@ -286,13 +260,10 @@ function flipCard(e) {
 
 function checkMatch() {
   let flippedCards = document.querySelectorAll(".flip");
-  // Convert NodeList into array
   let flippedArr = [...flippedCards];
-  // Get match value from first card in array
   let matchVal = [...flippedCards]
     .filter((card) => card.getAttribute("data-match").toString().length == 1)[0]
     .getAttribute("data-match");
-  // Check if all flipped cards have the same match value and different types
   if (
     flippedArr.every((card) =>
       card.getAttribute("data-match").includes(matchVal)
@@ -306,7 +277,6 @@ function checkMatch() {
       card.classList.remove("flip");
     });
     showProps(matchVal, selectLevel.value);
-    // Reset flip count
     flipCount = 0;
     if (
       game.querySelectorAll(".card").length ==
@@ -319,25 +289,21 @@ function checkMatch() {
 
 function updateBar(cards) {
   let resultBar = document.querySelectorAll(".slot");
-  //Remove "found" class from all elements
   resultBar.forEach((slot) =>
     slot.querySelectorAll("li").forEach((li) => li.classList.remove("found"))
   );
-  // Fill out note slots
   cards
     .filter((card) => card.type === "note")
     .forEach(
       (card, index) =>
         (resultBar[index].querySelector(".note").innerHTML = card.text)
     );
-  //Fill out quality slots
   cards
     .filter((card) => card.type === "qual")
     .forEach(
       (card, index) =>
         (resultBar[index].querySelector(".qual").innerHTML = card.text)
     );
-  console.log(cards);
 }
 
 function newGamePopUp() {

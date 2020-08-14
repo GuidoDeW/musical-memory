@@ -2,7 +2,6 @@
 
 :root {
   --btn-bg: rgb(170, 16, 16);
-  /*Alternative : rgb(114, 114, 114);*/
   --card-bg: rgb(155, 155, 220);
   --card-back-bg: rgb(90, 90, 204);
 }
@@ -15,13 +14,11 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   min-height: 100vh;
-  /* overflow: hidden; */
   margin: 0;
   font-family: "Roboto Condensed", Arial, Helvetica, sans-serif;
-  background-color: rgb(238, 252, 255);
-  /* Alternative: rgb(183, 237, 247);*/
+  background-color: rgb(230, 255, 255);
 }
 
 .instructions {
@@ -30,7 +27,6 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  justify-content: start;
   top: 0;
   left: 0;
   width: 300px;
@@ -50,6 +46,7 @@ body {
 .btn {
   display: block;
   cursor: pointer;
+  font-family: inherit;
   width: 100px;
   padding: 10px;
   border-radius: 5px;
@@ -76,7 +73,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* background: red; */
 }
 
 .menus select {
@@ -97,12 +93,12 @@ body {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  width: 680px;
-  max-height: 400px;
+  max-width: 660px;
+  max-height: 380px;
   border: 1px solid #000;
   border-radius: 10px;
-  padding: 15px;
-  margin: 20px 0 0 0;
+  padding: 10px;
+  margin: 20px 0;
   background: #fff;
 }
 
@@ -119,13 +115,16 @@ body {
   font-weight: bold;
   border-radius: 5px;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   transform: rotateY(180deg);
   transition: transform 0.2s, opacity 2s;
 }
 
 .card.flip,
 .card.solved {
-  /*.solved has these properties too to stop card from flipping over during fade-out effect */
   transform: rotateY(0);
   background-color: var(--card-bg);
   color: #fff;
@@ -142,11 +141,10 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /*Takes up 100% of screen to block select elements, but not buttons (.btn has a higher z-index) */
   height: 100%;
   width: 100%;
   opacity: 0;
-  transition: opacity 0.4s;
+  transition: opacity 1s;
   z-index: -1;
 }
 
@@ -193,19 +191,19 @@ body {
 }
 
 /* Media queries */
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 320px) {
   .game {
     max-height: 210px;
-    max-width: 350px;
+    max-width: 320px;
     padding: 5px 0;
   }
 
   .card {
-    line-height: 43px;
-    height: 43px;
-    width: 43px;
-    margin: 2.5px;
-    font-size: 8px;
+    line-height: 40px;
+    height: 40px;
+    width: 40px;
+    margin: 2px;
+    font-size: 7px;
     overflow-wrap: normal;
   }
 
@@ -232,6 +230,53 @@ body {
     width: 200px;
     transform: translateX(-200px);
   }
+
+  .instructions p {
+    margin: 8px 0;
+  }
+}
+
+@media screen and (min-width: 321px) and (max-width: 480px) {
+  .game {
+    max-height: 210px;
+    max-width: 340px;
+    padding: 5px 0;
+  }
+
+  .card {
+    line-height: 43px;
+    height: 43px;
+    width: 43px;
+    margin: 2px;
+    font-size: 8px;
+    overflow-wrap: normal;
+  }
+
+  .results {
+    flex-direction: column;
+    margin: 0 15px;
+    align-items: flex-start;
+    justify-content: space-around;
+    max-width: 80vw;
+  }
+
+  .slot {
+    flex-direction: row;
+    margin: 0;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .slot li {
+    margin: 10px 0;
+  }
+
+  .instructions {
+    justify-content: flex-start;
+    width: 200px;
+    transform: translateX(-200px);
+  }
+
   .instructions p {
     margin: 8px 0;
   }
@@ -241,7 +286,7 @@ body {
   .game {
     height: auto;
     max-height: 263px;
-    max-width: 480px;
+    max-width: 451px;
     padding: 5px 0;
   }
 
@@ -251,6 +296,17 @@ body {
     width: 53px;
     margin: 5px;
     font-size: 10px;
+  }
+}
+
+/* Landscape mode media queries */
+@media screen and (max-width: 768px) and (orientation: landscape) {
+  .slot {
+    margin: 0 5px;
+  }
+
+  .results {
+    max-width: 95vw;
   }
 }
 
