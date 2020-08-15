@@ -236,10 +236,11 @@ h1 {
     flex-direction: row;
     margin: 0;
     justify-content: space-between;
+    text-align: justify;
     width: 100%;
   }
 
-  .slot li:not(:first-of-type) {
+  .slot li {
     margin: 10px 0;
     width: 25%;
   }
@@ -280,17 +281,18 @@ h1 {
     margin: 0 15px;
     align-items: flex-start;
     justify-content: space-around;
-    max-width: 80vw;
+    max-width: 90vw;
   }
 
   .slot {
     flex-direction: row;
     margin: 0;
     justify-content: space-between;
+    text-align: justify;
     width: 100%;
   }
 
-  .slot li:not(:first-of-type) {
+  .slot li {
     margin: 10px 0;
     width: 25%;
   }
