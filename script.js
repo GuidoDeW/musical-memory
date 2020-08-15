@@ -84,14 +84,14 @@ const chordQuals = [
       { text: "Xmaj7", match: [1, 4], type: "qual" },
       { text: "X7", match: [5], type: "qual" },
       { text: "Xmin7", match: [2, 3, 6], type: "qual" },
-      { text: "Xmin7&flat;5", match: [7], type: "qual" },
+      { text: "Xmin7&#9837;5", match: [7], type: "qual" },
     ],
   },
   {
     scale: "natmin",
     quals: [
       { text: "Xmin7", match: [1, 4, 5], type: "qual" },
-      { text: "Xmin7&flat;5", match: [2], type: "qual" },
+      { text: "Xmin7&#9837;5", match: [2], type: "qual" },
       { text: "Xmaj7", match: [3, 6], type: "qual" },
       { text: "Xmin7", match: [1, 4, 5], type: "qual" },
       { text: "Xmin7", match: [1, 4, 5], type: "qual" },
@@ -103,8 +103,8 @@ const chordQuals = [
     scale: "harmmin",
     quals: [
       { text: "XminMaj7", match: [1], type: "qual" },
-      { text: "Xmin7&flat;5", match: [2], type: "qual" },
-      { text: "Xmaj7&sharp;5", match: [3], type: "qual" },
+      { text: "Xmin7&#9837;5", match: [2], type: "qual" },
+      { text: "Xmaj7&#9839;5", match: [3], type: "qual" },
       { text: "Xmin7", match: [4], type: "qual" },
       { text: "X7", match: [5], type: "qual" },
       { text: "Xmaj7", match: [6], type: "qual" },
@@ -116,11 +116,11 @@ const chordQuals = [
     quals: [
       { text: "XminMaj7", match: [1], type: "qual" },
       { text: "Xmin7", match: [2], type: "qual" },
-      { text: "Xmaj7&sharp;5", match: [3], type: "qual" },
+      { text: "Xmaj7&#9839;5", match: [3], type: "qual" },
       { text: "X7", match: [4, 5], type: "qual" },
       { text: "X7", match: [4, 5], type: "qual" },
-      { text: "Xmin7&flat;5", match: [6, 7], type: "qual" },
-      { text: "Xmin7&flat;5", match: [6, 7], type: "qual" },
+      { text: "Xmin7&#9837;5", match: [6, 7], type: "qual" },
+      { text: "Xmin7&#9837;5", match: [6, 7], type: "qual" },
     ],
   },
 ];
@@ -173,25 +173,25 @@ function loadScale(tone, acc, mode) {
   }
   if (acc === "f") {
     for (let i = 0; i <= flatKeys.indexOf(tone); i++) {
-      newScale[flatInds[i]] += "&flat;";
+      newScale[flatInds[i]] += "&#9837;";
     }
   } else {
     for (let i = 0; i <= sharpKeys.indexOf(tone); i++) {
-      newScale[sharpInds[i]] += "&sharp;";
+      newScale[sharpInds[i]] += "&#9839;";
     }
   }
   if (mode != "major") {
-    newScale[2] = newScale[2].includes("&sharp;")
+    newScale[2] = newScale[2].includes("&#9839;")
       ? newScale[2].slice(0, 1)
-      : newScale[2].concat("&flat;");
+      : newScale[2].concat("&#9837;");
     if (mode != "melmin") {
-      newScale[5] = newScale[5].includes("&sharp;")
+      newScale[5] = newScale[5].includes("&#9839;")
         ? newScale[5].slice(0, 1)
-        : newScale[5].concat("&flat;");
+        : newScale[5].concat("&#9837;");
       if (mode != "harmmin") {
-        newScale[6] = newScale[6].includes("&sharp;")
+        newScale[6] = newScale[6].includes("&#9839;")
           ? newScale[6].slice(0, 1)
-          : newScale[6].concat("&flat;");
+          : newScale[6].concat("&#9837;");
       }
     }
   }
