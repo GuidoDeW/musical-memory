@@ -340,10 +340,16 @@ h1 {
   .hide-btn {
     margin: 8px 0;
   }
+
   .instructions {
     padding: 10px;
   }
+
   .instructions p {
     margin: 8px 0;
+  }
+
+  .instructions p:first-of-type {
+    margin-top: 0;
   }
 }
