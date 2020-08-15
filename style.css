@@ -338,7 +338,7 @@ h1 {
 
 @media screen and (orientation: landscape) {
   .hide-btn {
-    margin: 8px 0;
+    margin: 5px 0;
   }
 
   .instructions {
@@ -346,7 +346,7 @@ h1 {
   }
 
   .instructions p {
-    margin: 8px 0;
+    margin: 5px 0;
   }
 
   .instructions p:first-of-type {
