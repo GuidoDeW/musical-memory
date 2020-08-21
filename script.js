@@ -28,8 +28,32 @@ selectScale.addEventListener("change", () => {
 });
 document.addEventListener("DOMContentLoaded", init);
 
-let flipCount = 0;
-let maxFlipped = 2;
+const flipCount = (function () {
+  let count = 0;
+  return {
+    reset: function () {
+      count = 0;
+    },
+    add: function (a) {
+      count += a;
+    },
+    current: function () {
+      return count;
+    },
+  };
+})();
+
+const maxFlipped = (function () {
+  let max = 2;
+  return {
+    alter: function (b) {
+      max = b;
+    },
+    current: function () {
+      return max;
+    },
+  };
+})();
 
 function init() {
   selectKey.selectedIndex = localStorage.getItem("key")
@@ -47,13 +71,13 @@ function init() {
 function setLevel(difficulty) {
   switch (difficulty) {
     case "easy":
-      maxFlipped = 2;
+      maxFlipped.alter(2);
       break;
     case "medium":
-      maxFlipped = 3;
+      maxFlipped.alter(3);
       break;
     case "hard":
-      maxFlipped = 4;
+      maxFlipped.alter(4);
   }
   loadCards(difficulty);
 }
@@ -203,7 +227,7 @@ function loadCards(difficulty) {
     <h2>Well done!</h2>
     <button id="new-game-btn" class="new-game-btn btn">New game</button>
   </div>`;
-  flipCount = 0;
+  flipCount.reset();
   let cards = loadScale(
     selectKey.value.charAt(0),
     selectKey.value.charAt(1),
@@ -238,16 +262,16 @@ function loadCards(difficulty) {
 
 function flipCard(e) {
   if (e.target.className == "card") {
-    if (flipCount >= maxFlipped) {
+    if (flipCount.current() >= maxFlipped.current()) {
       document
         .querySelectorAll(".flip")
         .forEach((flippedCard) => flippedCard.classList.remove("flip"));
-      flipCount = 0;
+      flipCount.reset();
     }
     if (!e.target.classList.contains("flip")) {
       e.target.classList.add("flip");
-      flipCount++;
-      if (flipCount == maxFlipped) {
+      flipCount.add(1);
+      if (flipCount.current() == maxFlipped.current()) {
         checkMatch();
       }
     }
@@ -257,28 +281,31 @@ function flipCard(e) {
 function checkMatch() {
   let flippedCards = document.querySelectorAll(".flip");
   let flippedArr = [...flippedCards];
-  let matchVal = [...flippedCards]
-    .filter((card) => card.getAttribute("data-match").toString().length == 1)[0]
-    .getAttribute("data-match");
-  if (
-    flippedArr.every((card) =>
-      card.getAttribute("data-match").includes(matchVal)
-    ) &&
-    flippedArr.length ==
-      [...new Set(flippedArr.map((card) => card.getAttribute("data-type")))]
-        .length
-  ) {
-    flippedCards.forEach((card) => {
-      card.classList.add("solved");
-      card.classList.remove("flip");
-    });
-    showProps(matchVal, selectLevel.value);
-    flipCount = 0;
+  let singleMatchArr = [...flippedCards].filter(
+    (card) => card.getAttribute("data-match").toString().length == 1
+  );
+  if (singleMatchArr.length > 0) {
+    let matchVal = singleMatchArr[0].getAttribute("data-match");
     if (
-      game.querySelectorAll(".card").length ==
-      game.querySelectorAll(".solved").length
+      flippedArr.every((card) =>
+        card.getAttribute("data-match").includes(matchVal)
+      ) &&
+      flippedArr.length ==
+        [...new Set(flippedArr.map((card) => card.getAttribute("data-type")))]
+          .length
     ) {
-      newGamePopUp();
+      flippedCards.forEach((card) => {
+        card.classList.add("solved");
+        card.classList.remove("flip");
+      });
+      showProps(matchVal, selectLevel.value);
+      flipCount.reset();
+      if (
+        game.querySelectorAll(".card").length ==
+        game.querySelectorAll(".solved").length
+      ) {
+        newGamePopUp();
+      }
     }
   }
 }
