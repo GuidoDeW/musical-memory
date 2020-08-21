@@ -225,6 +225,9 @@ h1 {
     overflow-wrap: normal;
   }
 
+  .menus select {
+    font-size: 12px;
+  }
   .menus select:not(:nth-of-type(2)) {
     width: 75px;
   }
@@ -283,6 +286,10 @@ h1 {
     margin: 2px;
     font-size: 8px;
     overflow-wrap: normal;
+  }
+
+  .menus select {
+    font-size: 12px;
   }
 
   .menus select:not(:nth-of-type(2)) {
